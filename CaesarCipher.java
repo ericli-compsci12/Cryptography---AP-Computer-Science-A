@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
 public class CaesarCipher {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -16,9 +19,16 @@ public class CaesarCipher {
             in.nextLine();
             System.out.print("Input cypher: ");
             String str = in.nextLine();
+            System.out.print("Do you have a key:(Y/N) ");
+            String yn = in.nextLine();
+            if(yn.equals("Y")) {
             System.out.print("Input key: ");
             int inp = in.nextInt();
             System.out.println(decode(str,inp));
+        }
+            else if(yn.equals("N")) {
+            decode(str);
+            }
         }
     }
     
@@ -45,5 +55,38 @@ public class CaesarCipher {
             else rtn = rtn + cipherText.charAt(i);
         }
         return rtn;
+    }
+    
+    public static String decode(String cipherText) {
+        String rtn = "";
+        int key = 0;
+        String word = "";
+        ArrayList<String> words = new ArrayList();
+        try {
+            File nameFile = new File("google-10000-english-no-swears.txt");
+            Scanner reader = new Scanner(nameFile);
+            while(reader.hasNextLine()) {
+                words.add(reader.nextLine());
+            }
+            reader.close();
+        }
+        catch(FileNotFoundException e) {
+            System.out.print("Error! File not found.");
+            e.printStackTrace();
+        }
+        
+        a:
+        for(int i = 1; i < 26; i++) {
+            for(int a = 0; a < words.size(); a++) {
+            if(words.get(a).length() == 9) word = words.get(a).toUpperCase();
+            if(word.length() == 9 && decode(cipherText,i).toUpperCase().contains(word)) {
+                key = i;
+                break a;
+            }
+        }
+        if(i==25) return"Key Not Found";
+    }
+    rtn = "key is " + key + ". Decoded text is " + decode(cipherText,key);
+    return rtn;
     }
 }
