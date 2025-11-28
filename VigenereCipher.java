@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 public class VigenereCipher {
+    //user interaction
     public static void main() {
         Scanner in = new Scanner(System.in);
         System.out.println("1. Encode 2. Decode");
@@ -25,6 +26,8 @@ public class VigenereCipher {
         }
     }
     
+    
+    //encode it by applying the key
     public static String encode(String plainText, String keyword) {
         String rtn = "";
         keyword = keyword.toUpperCase();
@@ -38,6 +41,7 @@ public class VigenereCipher {
         return rtn;
     }
 
+    //subtract key to decode it
     public static String decode(String cipherText, String keyword) {
         String rtn = "";
         keyword = keyword.toUpperCase();
@@ -51,6 +55,7 @@ public class VigenereCipher {
         return rtn;
     }
     
+    //tries to find key(unfinished)
     public static String findKey(String cipherText) {
         String key = "";
         String word = "";

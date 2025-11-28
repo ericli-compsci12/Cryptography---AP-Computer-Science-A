@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 public class CaesarCipher {
+    //main method, deals with user interaction
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("1. Encode 2. Decode");
@@ -32,6 +33,7 @@ public class CaesarCipher {
         }
     }
     
+    //encode a text
     public static String encode(String plainText, int key) {
         String rtn = "";
         
@@ -45,6 +47,7 @@ public class CaesarCipher {
         return rtn;
     }
     
+    //decode the text
     public static String decode(String cipherText, int key) {
         String rtn = "";
         for(int i = 0; i < cipherText.length(); i++) {
@@ -57,6 +60,8 @@ public class CaesarCipher {
         return rtn;
     }
     
+    
+    //traverses the dictionary to find the key
     public static String decode(String cipherText) {
         String rtn = "";
         int key = 0;
